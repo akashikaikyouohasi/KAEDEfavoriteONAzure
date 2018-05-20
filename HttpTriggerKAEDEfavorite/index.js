@@ -16,11 +16,13 @@ module.exports = function (context, req) {
     });
     context.log('Created client!!.');
 
-    if(inputTweet.body.match(/MediaUrls/) ){
+    if('MediaUrls'in inputTweet.body ){
         client.post('favorites/create', {id: inputTweet.body.TweetId}, function(error, tweet, response) {
             if(error) throw error;
             console.log(tweets);  // The favorites.
             console.log(response);  // Raw response object.
         });
-}
+    }else{
+        context.log('No Media!!.');
+    }
 };
