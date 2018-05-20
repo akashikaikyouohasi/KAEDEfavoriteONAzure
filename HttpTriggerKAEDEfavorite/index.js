@@ -16,11 +16,11 @@ module.exports = function (context, req) {
     });
     context.log('Created client!!.');
 
-    context.log('inputTweet.TweetId:' + inputTweet.body.TweetId);
-
-    client.post('favorites/create', {id: inputTweet.body.TweetId}, function(error, tweet, response) {
-        if(error) throw error;
-        console.log(tweets);  // The favorites.
-        console.log(response);  // Raw response object.
-    });
+    if(inputTweet.body.match(/MediaUrls/) ){
+        client.post('favorites/create', {id: inputTweet.body.TweetId}, function(error, tweet, response) {
+            if(error) throw error;
+            console.log(tweets);  // The favorites.
+            console.log(response);  // Raw response object.
+        });
+}
 };
